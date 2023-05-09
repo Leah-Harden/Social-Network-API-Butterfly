@@ -30,3 +30,5 @@ const userData = [
         friends: [1]
     }
 ]
+
+module.exports = userData

@@ -1,5 +1,5 @@
-const User = require('./models/User');
-const Thoughts = require('./models/Post');
+const User = require('./model/User');
+const Thoughts = require('./model/Post');
 
 
 
@@ -8,22 +8,22 @@ function getDate() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1; // Note: Month starts from 0 (January is 0)
     const day = currentDate.getDate();
-    
+
     return `Current date: ${year}-${month}-${day}`
-    
+
 }
 
 // Create a new thoughts from a user
-async function createThoughts(thoughtText, userId,reactions ) {
+async function createThoughts(thoughtText, userId, reactions) {
     try {
         const thoughts = await thoughts.findById(userId);
         if (!thoughts) {
             console.log('User not found');
             return;
         }
-        const time = getDate() 
+        const time = getDate()
 
-        const thought = new thoughts({ thoughtText, time, reactions});
+        const thought = new thoughts({ thoughtText, time, reactions });
         user.thoughts.push(thoughts._id);
         await Promise.all([user.save(), thoughts.save()]);
         console.log('thoughts created:', thoughts);

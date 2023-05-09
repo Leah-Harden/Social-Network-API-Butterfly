@@ -1,5 +1,5 @@
-const User = require('./models/User');
-const Thoughts = require('./models/Post');
+const User = require('./model/User');
+const Thoughts = require('./model/Thoughts');
 
 // Create a new user
 async function createUser(username, email, thoughts, friends) {

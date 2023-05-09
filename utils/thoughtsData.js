@@ -1,4 +1,4 @@
-const thoughtData = [
+const thoughtsData = [
     { //  1  ----------- 
         thoughtText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
         createdAt: '5/9/2021',
@@ -61,3 +61,4 @@ const thoughtData = [
     }
 ]
 
+module.exports = thoughtsData
