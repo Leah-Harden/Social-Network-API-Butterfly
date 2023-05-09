@@ -16,17 +16,17 @@ function getDate() {
 // Create a new thoughts from a user
 async function createThoughts(thoughtText, userId,reactions ) {
     try {
-        const user = await User.findById(userId);
-        if (!user) {
+        const thoughts = await thoughts.findById(userId);
+        if (!thoughts) {
             console.log('User not found');
             return;
         }
         const time = getDate() 
 
-        const post = new Post({ thoughtText, time, reactions});
-        user.thoughts.push(post._id);
-        await Promise.all([user.save(), post.save()]);
-        console.log('Post created:', post);
+        const thought = new thoughts({ thoughtText, time, reactions});
+        user.thoughts.push(thoughts._id);
+        await Promise.all([user.save(), thoughts.save()]);
+        console.log('thoughts created:', thoughts);
     } catch (error) {
         console.error('Error creating post:', error);
     }
@@ -36,14 +36,26 @@ async function createThoughts(thoughtText, userId,reactions ) {
 
 async function getThoughts(ThoughtsId) {
     try {
-        const user = await Thoughts.findById(ThoughtsId)
-        console.log('All users:', users);
+        const thoughts = await Thoughts.findById(ThoughtsId)
+        console.log('All thoughts:', thoughts);
     } catch (error) {
-        console.error('Error getting users:', error);
+        console.error('Error getting Thoughts:', error);
     }
 }
 
-// Get all posts for a user
+
+// Get one thoughts
+async function getThoughts(ThoughtsId) {
+    try {
+        const thoughts = await Thoughts.findById(ThoughtsId)
+        console.log('one thoughts:', thoughts);
+    } catch (error) {
+        console.error('Error getting Thoughts:', error);
+    }
+}
+
+
+// Get all posts from a user
 async function getUsersThoughts(userId) {
     try {
         const user = await User.findById(userId).populate('thoughts');
@@ -58,16 +70,16 @@ async function getUsersThoughts(userId) {
 }
 
 // Update a thoughts by ID
-async function updateThoughts(userId, newData) {
+async function updateThoughts(ThoughtsId, newData) {
     try {
-        const user = await User.findByIdAndUpdate(userId, newData, { new: true });
-        if (!user) {
-            console.log('User not found');
+        const Thoughts = await Thoughts.findByIdAndUpdate(ThoughtsId, newData, { new: true });
+        if (!Thoughts) {
+            console.log('Thoughts not found');
             return;
         }
-        console.log('User updated:', user);
+        console.log('Thoughts updated:', Thoughts);
     } catch (error) {
-        console.error('Error updating user:', error);
+        console.error('Error updating Thoughts:', error);
     }
 }
 
@@ -75,14 +87,14 @@ async function updateThoughts(userId, newData) {
 // Delete a Thoughts by ID
 async function deleteThoughts(ThoughtsId) {
     try {
-        const user = await Thoughts.findByIdAndDelete(userId);
-        if (!user) {
-            console.log('User not found');
+        const Thoughts = await Thoughts.findByIdAndDelete(ThoughtsId);
+        if (!Thoughts) {
+            console.log('Thoughts not found');
             return;
         }
-        console.log('User deleted:', user);
+        console.log('Thoughts deleted:', Thoughts);
     } catch (error) {
-        console.error('Error deleting user:', error);
+        console.error('Error deleting Thoughts:', error);
     }
 }
 

@@ -27,8 +27,6 @@ async function createUser(username, email,thoughts,friends) {
 }
 
 
-
-
 // Get one user
 async function getUser(userId) {
     try {
