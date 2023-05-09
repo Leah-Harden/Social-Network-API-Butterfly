@@ -57,14 +57,14 @@ const reactionSchema = new mongoose.Schema({
 });
 
 // the getter to format date 
-function dateMaker(time) {
-    const year = getFullYear(time)
-    const month = getMonth(time)
-    const day = getDay(time)
+reactionSchema.virtual('dateMaker').get(function () {
+    const year = getFullYear(this.createdAt)
+    const month = getMonth(this.createdAt)
+    const day = getDay(this.createdAt)
 
     const fullDate = `${day}/${month}/${year}`;
     return fullDate
-}
+})
 
 
 
