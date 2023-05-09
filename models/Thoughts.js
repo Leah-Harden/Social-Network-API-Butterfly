@@ -10,8 +10,6 @@ const thoughtsSchema = new Schema({
         unique: true,
         minlength: 1,
         maxlength: 280
-
-
     },
     createdAt: {
         type: Date,

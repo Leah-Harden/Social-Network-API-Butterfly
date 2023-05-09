@@ -5,20 +5,21 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        type: { $trim: { username: "$username", } }
     },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please provide a valid email address']
     },
-    thoughts: {
+    thoughts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Thoughts'
-    },
+    }],
     friends: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Friends'
     }],
 });
 
