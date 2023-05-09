@@ -12,6 +12,9 @@ function getDate() {
     
 }
 
+
+
+
 // Create a new user
 async function createUser(username, email,thoughts,friends) {
     try {
@@ -23,26 +26,20 @@ async function createUser(username, email,thoughts,friends) {
     }
 }
 
-// Create a new thoughts from a user
-async function createThoughts(thoughtText, userId,reactions ) {
-    try {
-        const user = await User.findById(userId);
-        if (!user) {
-            console.log('User not found');
-            return;
-        }
-        const time = getDate() 
 
-        const post = new Post({ thoughtText, time, reactions});
-        user.thoughts.push(post._id);
-        await Promise.all([user.save(), post.save()]);
-        console.log('Post created:', post);
+
+
+// Get one user
+async function getUser(userId) {
+    try {
+        const user = await User.findById(userId)
+        console.log('All users:', users);
     } catch (error) {
-        console.error('Error creating post:', error);
+        console.error('Error getting users:', error);
     }
 }
 
-// Get all users
+
 async function getAllUsers() {
     try {
         const users = await User.find();
@@ -52,19 +49,6 @@ async function getAllUsers() {
     }
 }
 
-// Get all posts for a user
-async function getUsersThoughts(userId) {
-    try {
-        const user = await User.findById(userId).populate('thoughts');
-        if (!user) {
-            console.log('User not found');
-            return;
-        }
-        console.log('User posts:', user.thoughts);
-    } catch (error) {
-        console.error('Error getting user posts:', error);
-    }
-}
 
 // Update a user by ID
 async function updateUser(userId, newData) {
@@ -80,10 +64,12 @@ async function updateUser(userId, newData) {
     }
 }
 
+
+
 // Delete a user by ID
-async function deleteUser(userId) {
+async function deleteUser(ThoughtsId) {
     try {
-        const user = await User.findByIdAndDelete(userId);
+        const user = await Thoughts.findByIdAndDelete(userId);
         if (!user) {
             console.log('User not found');
             return;
@@ -94,11 +80,12 @@ async function deleteUser(userId) {
     }
 }
 
+
+
 module.exports = {
     createUser,
-    createThoughts,
+    getUser,
     getAllUsers,
-    getUsersThoughts,
     updateUser,
-    deleteUser
+    deleteUser,
 };
