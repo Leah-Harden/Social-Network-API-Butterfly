@@ -8,14 +8,11 @@ const {
     deleteUser,
 } = require('../controllers/userController');
 
-// /api/students
+// /api/user all user / create a user
 router.route('/').get(getAllUsers).post(createUser);
 
-// /api/students/:studentId
-router.route('/:userId').get(getUser).delete(deleteUser);
-
-// /api/students/:studentId 
-router.route('/:studentId').put(updateUser);
+// /api/user/:userId  get one / delete / update
+router.route('/:userId').get(getUser).delete(deleteUser).put(updateUser);
 
 
 module.exports = router;

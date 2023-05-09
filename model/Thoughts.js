@@ -34,7 +34,7 @@ postSchema.virtual('reactionCount').get(function () {
 
 //reaction 
 const reactionSchema = new mongoose.Schema({
-    reaction_Id: {
+    reactionUser_Id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true

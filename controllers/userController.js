@@ -1,24 +1,10 @@
 const User = require('./models/User');
 const Thoughts = require('./models/Post');
 
-
-function getDate() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; // Note: Month starts from 0 (January is 0)
-    const day = currentDate.getDate();
-    
-    return `Current date: ${year}-${month}-${day}`
-    
-}
-
-
-
-
 // Create a new user
-async function createUser(username, email,thoughts,friends) {
+async function createUser(username, email, thoughts, friends) {
     try {
-        const user = new User({ username, email,thoughts,friends });
+        const user = new User({ username, email, thoughts, friends });
         await user.save();
         console.log('User created:', user);
     } catch (error) {
@@ -36,7 +22,6 @@ async function getUser(userId) {
         console.error('Error getting users:', error);
     }
 }
-
 
 async function getAllUsers() {
     try {

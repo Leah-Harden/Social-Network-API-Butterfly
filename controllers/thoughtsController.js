@@ -32,20 +32,10 @@ async function createThoughts(thoughtText, userId,reactions ) {
     }
 }
 
-// Get all Thoughts
-
-async function getThoughts(ThoughtsId) {
-    try {
-        const thoughts = await Thoughts.findById(ThoughtsId)
-        console.log('All thoughts:', thoughts);
-    } catch (error) {
-        console.error('Error getting Thoughts:', error);
-    }
-}
 
 
 // Get one thoughts
-async function getThoughts(ThoughtsId) {
+async function getOneThoughts(ThoughtsId) {
     try {
         const thoughts = await Thoughts.findById(ThoughtsId)
         console.log('one thoughts:', thoughts);
@@ -54,6 +44,16 @@ async function getThoughts(ThoughtsId) {
     }
 }
 
+// Get all Thoughts
+
+async function getThoughts() {
+    try {
+        const thoughts = await Thoughts.find();
+        console.log('All thoughts:', thoughts);
+    } catch (error) {
+        console.error('Error getting Thoughts:', error);
+    }
+}
 
 // Get all posts from a user
 async function getUsersThoughts(userId) {
@@ -100,6 +100,7 @@ async function deleteThoughts(ThoughtsId) {
 
 module.exports = {
     createThoughts,
+    getOneThoughts,
     getThoughts,
     getUsersThoughts,
     updateThoughts,
