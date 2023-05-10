@@ -1,9 +1,0 @@
-{
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "diffEditor.wordWrap": "inherit",
-    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-    "workbench.colorCustomizations": {},
-    "workbench.colorTheme": "Dracula",
-    "workbench.preferredDarkColorTheme": "Dracula"
-}

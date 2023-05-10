@@ -1,7 +1,10 @@
 const { connect, connection } = require('mongoose');
-ly
+
+const url = 'mongodb://localhost/3001';
+
+
 const connectionString =
-    process.env.MONGODB_URI || '???';
+    process.env.MONGODB_URI || url;
 
 connect(connectionString, {
     useNewUrlParser: true,

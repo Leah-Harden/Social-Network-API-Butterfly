@@ -6,7 +6,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        type: { $trim: { username: "$username", } }
+        trim: true
     },
     email: {
         type: String,
