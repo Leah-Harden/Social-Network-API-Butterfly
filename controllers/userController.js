@@ -35,11 +35,12 @@ async function getAllUsers(req, res) {
 }
 
 // Update a user by ID
-async function updateUser(userId, newData) {
+async function updateUser(req, res) {
     try {
-        const user = await User.findByIdAndUpdate(userId, newData, { new: true });
+        const user = await User.findByIdAndUpdate(req.user_Id, req.newData, { new: true });
         if (!user) {
-            console.log('User not found');
+            console.log('User found and updated');
+            res.json(user)
             return;
         }
         console.log('User updated:', user);
@@ -51,14 +52,14 @@ async function updateUser(userId, newData) {
 
 
 // Delete a user by ID
-async function deleteUser(ThoughtsId) {
+async function deleteUser(req, res) {
     try {
-        const user = await Thoughts.findByIdAndDelete(userId);
+        const user = await User.findByIdAndDelete(req);
         if (!user) {
-            console.log('User not found');
+            console.log('User found and deleted');
+            res.json(user)
             return;
         }
-        console.log('User deleted:', user);
     } catch (error) {
         console.error('Error deleting user:', error);
     }

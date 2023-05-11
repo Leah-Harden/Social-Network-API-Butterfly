@@ -4,7 +4,7 @@ const User = require('../model/User');
 const userData = require('../utils/userData');
 
 const Thoughts = require('../model/Thoughts');
-const thoughtsData = require('../utils/thoughtsData');
+// const thoughtsData = require('../utils/thoughtsData');
 
 connection.on('error', (err) => err);
 
@@ -19,9 +19,9 @@ connection.once('open', async () => {
 
     // seeded data
     await User.insertMany(userData);
-    await Thoughts.insertMany(thoughtsData);
+    // await Thoughts.insertMany(thoughtsData);
 
-    console.table(User, Thoughts);
+    console.table(User);
     console.info('Seeding complete! 🌱');
     process.exit(0);
 })
