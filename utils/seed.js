@@ -1,10 +1,10 @@
-// const connection = require('../config/connection');
+const connection = require('../config/connection');
 
-// const User = require('../model/User');
-// const userData = require('../utils/userData');
+const User = require('../model/User');
+const userData = require('../utils/userData');
 
-// const Thoughts = require('../model/Thoughts');
-// const thoughtsData = require('../utils/thoughtsData');
+const Thoughts = require('../model/Thoughts');
+const thoughtsData = require('../utils/thoughtsData');
 
 connection.on('error', (err) => err);
 

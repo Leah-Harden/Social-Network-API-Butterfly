@@ -2,11 +2,11 @@ const User = require('../model/User');
 const Thoughts = require('../model/Thoughts');
 
 // Create a new user
-async function createUser(username, email, thoughts, friends) {
+async function createUser(req, res) {
     try {
-        const user = new User({ username, email, thoughts, friends });
-        await user.save();
+        const user = new User.create(req.body);
         console.log('User created:', user);
+        res.json(user)
     } catch (error) {
         console.error('Error creating user:', error);
     }
@@ -14,24 +14,25 @@ async function createUser(username, email, thoughts, friends) {
 
 
 // Get one user
-async function getUser(userId) {
+async function getUser(req, res) {
     try {
-        const user = await User.findById(userId)
-        console.log('All users:', users);
+        const user = await User.findById(req)
+        console.log('found user:', user);
+        res.json(user)
     } catch (error) {
         console.error('Error getting users:', error);
     }
 }
 
-async function getAllUsers() {
+async function getAllUsers(req, res) {
     try {
-        const users = await User.find();
+        const users = await User.find()
         console.log('All users:', users);
+        res.json(users)
     } catch (error) {
         console.error('Error getting users:', error);
     }
 }
-
 
 // Update a user by ID
 async function updateUser(userId, newData) {
