@@ -61,4 +61,5 @@ const thoughtsData = [
     }
 ]
 
-module.exports = thoughtsData
+
+"friends": "645d1b5d559e491d31254797"

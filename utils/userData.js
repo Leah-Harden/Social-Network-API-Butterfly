@@ -31,4 +31,27 @@ const userData = [
     }
 ]
 
-module.exports = userData
+// module.exports = userData
+
+{
+    "username": "Leah21",
+        "email": "leah@gmail.com"
+
+},
+{
+    "username": "Dave32",
+        "email": "dave@gmail.com"
+},
+{
+    "username": "451Kate",
+        "email": "Kate@gmail.com"
+},
+{
+    "username": "Sue_12",
+        "email": "Sue@gmail.com"
+
+},
+{
+    "username": "TimeTim",
+        "email": "Time@gmail.com"
+}

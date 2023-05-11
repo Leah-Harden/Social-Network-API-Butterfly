@@ -1,36 +1,6 @@
 const { Schema, model } = require('mongoose');
 const mongoose = require('mongoose');
 
-
-//thoughts
-const thoughtsSchema = new Schema({
-    thoughtText: {
-        type: String,
-        required: true,
-        unique: true,
-        minlength: 1,
-        maxlength: 280
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    reactions: [reactionSchema],
-
-}
-);
-
-// Define the virtual property "reactionCount"
-postSchema.virtual('reactionCount').get(function () {
-    return this.reactions.length;
-});
-
-
 //reaction 
 const reactionSchema = new mongoose.Schema({
     reactionUser_Id: {
@@ -51,9 +21,37 @@ const reactionSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: dateMaker
     }
 });
+
+//thoughts
+const thoughtsSchema = new Schema({
+    thoughtText: {
+        type: String,
+        required: true,
+        unique: true,
+        minlength: 1,
+        maxlength: 280
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    username: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    reactions: [reactionSchema],
+
+}
+);
+
+// Define the virtual property "reactionCount"
+thoughtsSchema.virtual('reactionCount').get(function () {
+    return this.reactions.length;
+});
+
+
 
 // the getter to format date 
 reactionSchema.virtual('dateMaker').get(function () {

@@ -1,5 +1,5 @@
-const User = require('./model/User');
-const Thoughts = require('./model/Post');
+const User = require('../model/User');
+const Thoughts = require('../model/Thoughts');
 
 
 

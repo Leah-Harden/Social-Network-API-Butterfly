@@ -1,6 +1,6 @@
 const { connect, connection } = require('mongoose');
 
-const url = 'mongodb://localhost/3001';
+const url = 'mongodb://localhost:27017';
 
 
 const connectionString =
