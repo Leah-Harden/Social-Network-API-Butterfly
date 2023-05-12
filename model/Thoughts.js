@@ -14,7 +14,7 @@ const reactionSchema = new mongoose.Schema({
         unique: true,
         maxlength: 280
     },
-    username: {
+    usernameReaction: {
         type: String,
         required: true
     },

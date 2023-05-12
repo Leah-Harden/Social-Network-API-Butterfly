@@ -16,11 +16,12 @@ function getDate() {
 // Create a new thoughts from a user
 async function createThoughts(req, res) {
     try {
-        const Thought = new Thoughts.create(req.body);
-        console.log('Thoughts created:', Thought);
-        res.json(Thought)
+        const thought = await Thoughts.create(req.body);
+        console.log('Thought created:', thought);
+        res.json(thought);
     } catch (error) {
-        console.error('Error creating Thoughts:', error);
+        console.error('Error creating thought:', error);
+        res.status(500).json({ error: 'Failed to create thought' });
     }
 }
 
