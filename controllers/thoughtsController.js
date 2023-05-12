@@ -53,22 +53,24 @@ async function getThoughts(req, res) {
 // Get all posts from a user
 async function getUsersThoughts(req, res) {
     try {
-        const user = await User.findById(req).populate('thoughts');
-        res.json(user)
-        if (!user) {
-            console.log('User not found');
-            return;
+        const user = await User.findById(req.params.thoughtId).populate('thoughts');
+        if (user) {
+            console.log('thoughts found by Users');
+            res.json(user)
+        } else {
+            console.log('thoughts not found');
+            res.status(404).json({ message: 'thoughts not found' });
         }
-        console.log('User posts:', user.thoughts);
     } catch (error) {
-        console.error('Error getting user posts:', error);
+        console.error('Error deleting thoughts:', error);
+        res.status(500).json({ message: 'Error deleting thoughts' });
     }
 }
 
 // Update a thoughts by ID
 async function updateThoughts(req, res) {
     try {
-        const thought = await Thoughts.findByIdAndUpdate(req.params.thoughtsId, req.body, { new: true });
+        const thought = await Thoughts.findByIdAndUpdate(req.params.thoughtId, req.body, { new: true });
         if (thought) {
             console.log('Thought found and updated:', thought);
             res.json(thought);
@@ -86,15 +88,19 @@ async function updateThoughts(req, res) {
 // Delete a Thoughts by ID
 async function deleteThoughts(req, res) {
     try {
-        const Thought = await Thoughts.findByIdAndDelete(req);
-        if (!Thought) {
-            console.log('Thoughts not found');
+        const Thought = await Thoughts.findByIdAndDelete(req.params.thoughtId);
+        if (Thought) {
+            console.log('Thought found and deleted');
             res.json(Thought)
             return;
+        } else {
+            console.log('Thought not found');
+            res.status(404).json({ message: 'Thought not found' });
         }
         console.log('Thoughts deleted:', Thought);
     } catch (error) {
-        console.error('Error deleting Thoughts:', error);
+        console.error('Error deleting Thought:', error);
+        res.status(500).json({ message: 'Error deleting Thought' });
     }
 }
 
