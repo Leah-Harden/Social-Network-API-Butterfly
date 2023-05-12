@@ -9,13 +9,13 @@ const {
     deleteThoughts
 } = require('../controllers/thoughtsController');
 
-// /api/thoughts
+// /thoughts
 router.route('/').get(getThoughts).post(createThoughts);
 
-// /api/thoughts/:studentId  get one / delete / update
-router.route('/:userId').get(getOneThoughts).delete(deleteThoughts).post(updateThoughts);
+// /thoughts/:thoughtId  get one / delete / update
+router.route('/:thoughtId').get(getOneThoughts).delete(deleteThoughts).put(updateThoughts);
 
-// /api/thoughts/:studentId/thoughts
+// /thoughts/:userId/thoughts
 router.route('/:userId/thoughts').get(getUsersThoughts);
 
 module.exports = router;

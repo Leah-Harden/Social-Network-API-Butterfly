@@ -4,19 +4,18 @@ const Thoughts = require('../model/Thoughts');
 // Create a new user
 async function createUser(req, res) {
     try {
-        const user = new User.create(req.body);
+        const user = await User.create(req.body);
         console.log('User created:', user);
-        res.json(user)
+        res.json(user);
     } catch (error) {
         console.error('Error creating user:', error);
     }
 }
 
-
 // Get one user
 async function getUser(req, res) {
     try {
-        const user = await User.findById(req)
+        const user = await User.findById(req.params.userId)
         console.log('found user:', user);
         res.json(user)
     } catch (error) {
@@ -37,31 +36,35 @@ async function getAllUsers(req, res) {
 // Update a user by ID
 async function updateUser(req, res) {
     try {
-        const user = await User.findByIdAndUpdate(req.user_Id, req.newData, { new: true });
-        if (!user) {
-            console.log('User found and updated');
-            res.json(user)
-            return;
+        const user = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+        if (user) {
+            console.log('User found and updated:', user);
+            res.json(user);
+        } else {
+            console.log('User not found');
+            res.status(404).json({ message: 'User not found' });
         }
-        console.log('User updated:', user);
     } catch (error) {
         console.error('Error updating user:', error);
+        res.status(500).json({ message: 'Error updating user' });
     }
 }
-
 
 
 // Delete a user by ID
 async function deleteUser(req, res) {
     try {
-        const user = await User.findByIdAndDelete(req);
-        if (!user) {
+        const user = await User.findByIdAndDelete(req.params.userId);
+        if (user) {
             console.log('User found and deleted');
-            res.json(user)
-            return;
+            res.json(user);
+        } else {
+            console.log('User not found');
+            res.status(404).json({ message: 'User not found' });
         }
     } catch (error) {
         console.error('Error deleting user:', error);
+        res.status(500).json({ message: 'Error deleting user' });
     }
 }
 

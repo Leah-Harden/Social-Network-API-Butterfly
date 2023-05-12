@@ -16,7 +16,7 @@ function getDate() {
 // Create a new thoughts from a user
 async function createThoughts(req, res) {
     try {
-        const thought = await Thoughts.create(req.body);
+        const thought = await Thoughts.create(req.params.thoughtId);
         console.log('Thought created:', thought);
         res.json(thought);
     } catch (error) {
@@ -30,14 +30,14 @@ async function createThoughts(req, res) {
 // Get one thoughts
 async function getOneThoughts(req, res) {
     try {
-        const thought = await Thoughts.findById(req)
-        console.log('one thoughts:', thought);
-        res.json(thought)
+        const thought = await Thoughts.findById(req.params.thoughtId);
+        console.log('One thought:', thought);
+        res.json(thought);
     } catch (error) {
-        console.error('Error getting Thoughts:', error);
+        console.error('Error getting thoughts:', error);
+        res.status(500).json({ message: 'Error getting thoughts' });
     }
 }
-
 // Get all Thoughts
 
 async function getThoughts(req, res) {
@@ -68,15 +68,17 @@ async function getUsersThoughts(req, res) {
 // Update a thoughts by ID
 async function updateThoughts(req, res) {
     try {
-        const Thought = await Thoughts.findByIdAndUpdate(req.user_Id, req.newData, { new: true });
-        if (!Thought) {
-            console.log('Thoughts not found');
-            res.json(Thought)
-            return;
+        const thought = await Thoughts.findByIdAndUpdate(req.params.thoughtsId, req.body, { new: true });
+        if (thought) {
+            console.log('Thought found and updated:', thought);
+            res.json(thought);
+        } else {
+            console.log('Thought not found');
+            res.status(404).json({ message: 'Thought not found' });
         }
-        console.log('Thoughts updated:', Thought);
     } catch (error) {
-        console.error('Error updating Thoughts:', error);
+        console.error('Error updating thought:', error);
+        res.status(500).json({ message: 'Error updating thought' });
     }
 }
 
