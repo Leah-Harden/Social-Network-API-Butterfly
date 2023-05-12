@@ -14,31 +14,24 @@ function getDate() {
 }
 
 // Create a new thoughts from a user
-async function createThoughts(thoughtText, userId, reactions) {
+async function createThoughts(req, res) {
     try {
-        const thoughts = await thoughts.findById(userId);
-        if (!thoughts) {
-            console.log('User not found');
-            return;
-        }
-        const time = getDate()
-
-        const thought = new thoughts({ thoughtText, time, reactions });
-        user.thoughts.push(thoughts._id);
-        await Promise.all([user.save(), thoughts.save()]);
-        console.log('thoughts created:', thoughts);
+        const Thought = new Thoughts.create(req.body);
+        console.log('Thoughts created:', Thought);
+        res.json(Thought)
     } catch (error) {
-        console.error('Error creating post:', error);
+        console.error('Error creating Thoughts:', error);
     }
 }
 
 
 
 // Get one thoughts
-async function getOneThoughts(ThoughtsId) {
+async function getOneThoughts(req, res) {
     try {
-        const thoughts = await Thoughts.findById(ThoughtsId)
-        console.log('one thoughts:', thoughts);
+        const thought = await Thoughts.findById(req)
+        console.log('one thoughts:', thought);
+        res.json(thought)
     } catch (error) {
         console.error('Error getting Thoughts:', error);
     }
@@ -46,19 +39,21 @@ async function getOneThoughts(ThoughtsId) {
 
 // Get all Thoughts
 
-async function getThoughts() {
+async function getThoughts(req, res) {
     try {
-        const thoughts = await Thoughts.find();
-        console.log('All thoughts:', thoughts);
+        const thought = await Thoughts.find();
+        console.log('All thoughts:', thought);
+        res.json(thought)
     } catch (error) {
         console.error('Error getting Thoughts:', error);
     }
 }
 
 // Get all posts from a user
-async function getUsersThoughts(userId) {
+async function getUsersThoughts(req, res) {
     try {
-        const user = await User.findById(userId).populate('thoughts');
+        const user = await User.findById(req).populate('thoughts');
+        res.json(user)
         if (!user) {
             console.log('User not found');
             return;
@@ -70,14 +65,15 @@ async function getUsersThoughts(userId) {
 }
 
 // Update a thoughts by ID
-async function updateThoughts(ThoughtsId, newData) {
+async function updateThoughts(req, res) {
     try {
-        const Thoughts = await Thoughts.findByIdAndUpdate(ThoughtsId, newData, { new: true });
-        if (!Thoughts) {
+        const Thought = await Thoughts.findByIdAndUpdate(req.user_Id, req.newData, { new: true });
+        if (!Thought) {
             console.log('Thoughts not found');
+            res.json(Thought)
             return;
         }
-        console.log('Thoughts updated:', Thoughts);
+        console.log('Thoughts updated:', Thought);
     } catch (error) {
         console.error('Error updating Thoughts:', error);
     }
@@ -85,14 +81,15 @@ async function updateThoughts(ThoughtsId, newData) {
 
 
 // Delete a Thoughts by ID
-async function deleteThoughts(ThoughtsId) {
+async function deleteThoughts(req, res) {
     try {
-        const Thoughts = await Thoughts.findByIdAndDelete(ThoughtsId);
-        if (!Thoughts) {
+        const Thought = await Thoughts.findByIdAndDelete(req);
+        if (!Thought) {
             console.log('Thoughts not found');
+            res.json(Thought)
             return;
         }
-        console.log('Thoughts deleted:', Thoughts);
+        console.log('Thoughts deleted:', Thought);
     } catch (error) {
         console.error('Error deleting Thoughts:', error);
     }
