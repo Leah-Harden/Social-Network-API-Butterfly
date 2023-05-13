@@ -71,7 +71,7 @@ async function deleteUser(req, res) {
 // Get all posts from a user
 async function getUsersThoughts(req, res) {
     try {
-        const user = await User.findById(req.params.thoughtId).populate('thoughts');
+        const user = await User.findById(req.params.userId).populate('thoughts');
         if (user) {
             console.log('thoughts found by Users');
             res.json(user)
