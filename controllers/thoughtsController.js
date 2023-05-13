@@ -16,8 +16,9 @@ function getDate() {
 // Create a new thoughts from a user
 async function createThoughts(req, res) {
     try {
-        const thought = await Thoughts.create(req.params.thoughtId);
+        const thought = await Thoughts.create(req.body);
         console.log('Thought created:', thought);
+        await User.findOneAndUpdate({ username: req.body.username }, { $push: { thoughts: thought._id } });
         res.json(thought);
     } catch (error) {
         console.error('Error creating thought:', error);
@@ -50,22 +51,22 @@ async function getThoughts(req, res) {
     }
 }
 
-// Get all posts from a user
-async function getUsersThoughts(req, res) {
-    try {
-        const user = await User.findById(req.params.thoughtId).populate('thoughts');
-        if (user) {
-            console.log('thoughts found by Users');
-            res.json(user)
-        } else {
-            console.log('thoughts not found');
-            res.status(404).json({ message: 'thoughts not found' });
-        }
-    } catch (error) {
-        console.error('Error deleting thoughts:', error);
-        res.status(500).json({ message: 'Error deleting thoughts' });
-    }
-}
+// // Get all posts from a user
+// async function getUsersThoughts(req, res) {
+//     try {
+//         const user = await User.findById(req.params.thoughtId).populate('thoughts');
+//         if (user) {
+//             console.log('thoughts found by Users');
+//             res.json(user)
+//         } else {
+//             console.log('thoughts not found');
+//             res.status(404).json({ message: 'thoughts not found' });
+//         }
+//     } catch (error) {
+//         console.error('Error deleting thoughts:', error);
+//         res.status(500).json({ message: 'Error deleting thoughts' });
+//     }
+// }
 
 // Update a thoughts by ID
 async function updateThoughts(req, res) {
@@ -108,7 +109,7 @@ module.exports = {
     createThoughts,
     getOneThoughts,
     getThoughts,
-    getUsersThoughts,
+    // getUsersThoughts,
     updateThoughts,
     deleteThoughts
 };

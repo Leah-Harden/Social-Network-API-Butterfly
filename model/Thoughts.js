@@ -11,7 +11,7 @@ const reactionSchema = new mongoose.Schema({
     reactionBody: {
         type: String,
         required: true,
-        unique: true,
+        //unique: true,
         maxlength: 280
     },
     usernameReaction: {
@@ -29,7 +29,7 @@ const thoughtsSchema = new Schema({
     thoughtText: {
         type: String,
         required: true,
-        unique: true,
+        //unique: true,
         minlength: 1,
         maxlength: 280
     },
@@ -37,10 +37,10 @@ const thoughtsSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    username: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
+    username: {
+        type: String,
+        required: true
+    },
     reactions: [reactionSchema],
 
 }

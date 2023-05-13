@@ -25,7 +25,7 @@ async function getUser(req, res) {
 
 async function getAllUsers(req, res) {
     try {
-        const users = await User.find()
+        const users = await User.find().populate('thoughts')
         console.log('All users:', users);
         res.json(users)
     } catch (error) {
@@ -68,6 +68,22 @@ async function deleteUser(req, res) {
     }
 }
 
+// Get all posts from a user
+async function getUsersThoughts(req, res) {
+    try {
+        const user = await User.findById(req.params.thoughtId).populate('thoughts');
+        if (user) {
+            console.log('thoughts found by Users');
+            res.json(user)
+        } else {
+            console.log('thoughts not found');
+            res.status(404).json({ message: 'thoughts not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting thoughts:', error);
+        res.status(500).json({ message: 'Error deleting thoughts' });
+    }
+}
 
 
 module.exports = {
@@ -76,4 +92,5 @@ module.exports = {
     getAllUsers,
     updateUser,
     deleteUser,
+    getUsersThoughts
 };
